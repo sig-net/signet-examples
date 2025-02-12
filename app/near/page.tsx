@@ -111,6 +111,45 @@ export const NearPage = () => {
             chainId: "osmo-test-5",
             contract: chainSigContract,
         })
+
+        const path = "osmo"
+
+        const { address: from, publicKey } = await osmosis.deriveAddressAndPublicKey(nearAccount, path)
+
+        const { transaction, mpcPayloads } = await osmosis.getMPCPayloadAndTransaction({
+            address: from,
+            publicKey,
+            messages: [
+                {
+                    typeUrl: "/cosmos.bank.v1beta1.MsgSend",
+                    value: {
+                        fromAddress: from,
+                        toAddress: "osmo1q5heryp07w6dflc3h4egdca6nmmekk0aqkj9gp",
+                        amount: [{ denom: "uosmo", amount: "1000" }],
+                    },
+                },
+            ],
+            memo: "test",
+        })
+
+        const rsvSignature = await chainSigContract?.sign({
+            payload: mpcPayloads[0],
+            path,
+            key_version: 0,
+        })
+
+        if (!rsvSignature) {
+            throw new Error("Failed to sign transaction")
+        };
+
+        const tx = osmosis.addSignature({
+            transaction,
+            mpcSignatures: [rsvSignature],
+        })
+
+        const txHash = await osmosis.broadcastTx(tx)
+
+        console.log({ txHash })
     }
 
     return (
