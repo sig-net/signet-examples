@@ -1,7 +1,6 @@
 "use client"
 
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { keccak256, toBytes } from "viem";
 import { useMemo } from "react";
 import { utils } from "signet.js";
 import { usePublicClient, useWalletClient } from "wagmi";

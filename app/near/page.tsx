@@ -60,7 +60,6 @@ export const NearPage = () => {
     }
 
     const handleBtcTransaction = async () => {
-
         if (!chainSigContract) return null;
 
         const btcRpcAdapter = new BTCRpcAdapters.Mempool('https://mempool.space/testnet4/api')
@@ -74,8 +73,6 @@ export const NearPage = () => {
         const path = "btc"
 
         const { publicKey, address: from } = await btc.deriveAddressAndPublicKey(nearAccount, path)
-
-        console.log({ publicKey, from })
 
         const { transaction, mpcPayloads } = await btc.getMPCPayloadAndTransaction({
             publicKey,
