@@ -34,7 +34,7 @@ export const NearPage = () => {
 
         const { address: from } = await evm.deriveAddressAndPublicKey(nearAccount, path)
 
-        const { transaction, mpcPayloads } = await evm.processTransactionForSigning({
+        const { transaction, mpcPayloads } = await evm.getMPCPayloadAndTransaction({
             from: from as `0x${string}`,
             to: "0x4174678c78fEaFd778c1ff319D5D326701449b25",
             value: 1n,
@@ -74,7 +74,7 @@ export const NearPage = () => {
 
         const message = "Hello, world!"
 
-        const { mpcPayloads } = await evm.processMessageForSigning(message)
+        const { mpcPayloads } = await evm.getMPCPayloadAndMessage(message)
 
         const rsvSignature = await chainSigContract?.sign({
             payload: mpcPayloads[0],
@@ -131,7 +131,7 @@ export const NearPage = () => {
             }
         };
 
-        const { mpcPayloads } = await evm.processTypedDataForSigning(typedData)
+        const { mpcPayloads } = await evm.getMPCPayloadAndTypedData(typedData)
 
         const rsvSignature = await chainSigContract?.sign({
             payload: mpcPayloads[0],
@@ -171,7 +171,7 @@ export const NearPage = () => {
 
         const { publicKey, address: from } = await btc.deriveAddressAndPublicKey(nearAccount, path)
 
-        const { transaction, mpcPayloads } = await btc.processTransactionForSigning({
+        const { transaction, mpcPayloads } = await btc.getMPCPayloadAndTransaction({
             publicKey,
             from,
             to: "tb1qjcgmg9ekeujzkdp4ep6a2lqvc5y50495uvp4u0",
@@ -210,7 +210,7 @@ export const NearPage = () => {
 
         const { address: from, publicKey } = await osmosis.deriveAddressAndPublicKey(nearAccount, path)
 
-        const { transaction, mpcPayloads } = await osmosis.processTransactionForSigning({
+        const { transaction, mpcPayloads } = await osmosis.getMPCPayloadAndTransaction({
             address: from,
             publicKey,
             messages: [
