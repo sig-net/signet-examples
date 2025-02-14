@@ -124,7 +124,7 @@ export const NearPage = () => {
                     { name: "age", type: "uint256" }
                 ]
             },
-            primaryType: "Person",
+            primaryType: "Person" as const,
             message: {
                 name: "Alice",
                 age: 28
