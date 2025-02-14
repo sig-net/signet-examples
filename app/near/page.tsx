@@ -34,6 +34,9 @@ export const NearPage = () => {
 
         const { address: from } = await evm.deriveAddressAndPublicKey(nearAccount, path)
 
+        const { balance, decimals } = await evm.getBalance(from)
+        console.log({ balance, decimals })
+
         const { transaction, mpcPayloads } = await evm.getMPCPayloadAndTransaction({
             from: from as `0x${string}`,
             to: "0x4174678c78fEaFd778c1ff319D5D326701449b25",
@@ -171,6 +174,9 @@ export const NearPage = () => {
 
         const { publicKey, address: from } = await btc.deriveAddressAndPublicKey(nearAccount, path)
 
+        const { balance, decimals } = await btc.getBalance(from)
+        console.log({ balance, decimals, from })
+
         const { transaction, mpcPayloads } = await btc.getMPCPayloadAndTransaction({
             publicKey,
             from,
@@ -209,6 +215,9 @@ export const NearPage = () => {
         const path = "osmo"
 
         const { address: from, publicKey } = await osmosis.deriveAddressAndPublicKey(nearAccount, path)
+
+        const { balance, decimals } = await osmosis.getBalance(from)
+        console.log({ balance, decimals })
 
         const { transaction, mpcPayloads } = await osmosis.getMPCPayloadAndTransaction({
             address: from,
