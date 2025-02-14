@@ -33,7 +33,7 @@ export const NearPage = () => {
 
         const { address: from } = await evm.deriveAddressAndPublicKey(nearAccount, path)
 
-        const { transaction, mpcPayloads } = await evm.getMPCPayloadAndTransaction({
+        const { transaction, mpcPayloads } = await evm.processTransactionForSigning({
             from: from as `0x${string}`,
             to: "0x4174678c78fEaFd778c1ff319D5D326701449b25",
             value: 1n,
@@ -49,7 +49,7 @@ export const NearPage = () => {
             throw new Error("Failed to sign transaction")
         };
 
-        const tx = evm.addSignature({
+        const tx = evm.addTransactionSignature({
             transaction,
             mpcSignatures: [rsvSignature],
         })
@@ -74,7 +74,7 @@ export const NearPage = () => {
 
         const { publicKey, address: from } = await btc.deriveAddressAndPublicKey(nearAccount, path)
 
-        const { transaction, mpcPayloads } = await btc.getMPCPayloadAndTransaction({
+        const { transaction, mpcPayloads } = await btc.processTransactionForSigning({
             publicKey,
             from,
             to: "tb1qjcgmg9ekeujzkdp4ep6a2lqvc5y50495uvp4u0",
@@ -91,7 +91,7 @@ export const NearPage = () => {
             throw new Error("Failed to sign transaction")
         };
 
-        const tx = btc.addSignature({
+        const tx = btc.addTransactionSignature({
             transaction,
             mpcSignatures: [rsvSignature],
         })
@@ -113,7 +113,7 @@ export const NearPage = () => {
 
         const { address: from, publicKey } = await osmosis.deriveAddressAndPublicKey(nearAccount, path)
 
-        const { transaction, mpcPayloads } = await osmosis.getMPCPayloadAndTransaction({
+        const { transaction, mpcPayloads } = await osmosis.processTransactionForSigning({
             address: from,
             publicKey,
             messages: [
@@ -139,7 +139,7 @@ export const NearPage = () => {
             throw new Error("Failed to sign transaction")
         };
 
-        const tx = osmosis.addSignature({
+        const tx = osmosis.addTransactionSignature({
             transaction,
             mpcSignatures: [rsvSignature],
         })

@@ -20,12 +20,12 @@ type ProvidersProps = {
 
 export const Providers: React.FC<ProvidersProps> = ({ children }) => {
 
-    const { rainbowKitProjectId } = useEnv();
+    const { rainbowKitProjectId, sepoliaInfuraUrl } = useEnv();
 
     const config = getDefaultConfig({
         appName: 'Signet Examples',
         projectId: rainbowKitProjectId,
-        chains: [sepolia, baseSepolia],
+        chains: [{ ...sepolia, rpcUrls: { default: { http: [sepoliaInfuraUrl] } } }, baseSepolia],
         ssr: true,
     });
 

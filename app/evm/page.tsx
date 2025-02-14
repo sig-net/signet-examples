@@ -1,5 +1,6 @@
 "use client"
 
+import { useEnv } from "@/hooks/useEnv";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useMemo } from "react";
 import { utils } from "signet.js";
@@ -49,7 +50,7 @@ const EvmSign = () => {
                 }}>Get Latest Key Version</button>
                 <button onClick={async () => {
                     const pubKey = await chainSignature?.sign({
-                        payload: new Array(32).fill(1),
+                        payload: new Array(32).fill(2),
                         path: "1",
                         key_version: 0
                     });
