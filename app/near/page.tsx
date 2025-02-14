@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import useInitNear from "./_hooks/useInitNear";
 import { utils, EVM, Bitcoin, Cosmos, BTCRpcAdapters } from 'signet.js'
 import { useEnv } from "@/hooks/useEnv";
+import { recoverMessageAddress, recoverTypedDataAddress } from "viem";
 
 export const NearPage = () => {
     const { account, keyPair } = useInitNear();
@@ -57,6 +58,102 @@ export const NearPage = () => {
         const txHash = await evm.broadcastTx(tx)
 
         console.log({ txHash })
+    }
+
+    const handleEvmSignMessage = async () => {
+        if (!chainSigContract) return null;
+
+        const evm = new EVM({
+            rpcUrl: sepoliaInfuraUrl,
+            contract: chainSigContract,
+        })
+
+        const path = "eth"
+
+        const { address: from } = await evm.deriveAddressAndPublicKey(nearAccount, path)
+
+        const message = "Hello, world!"
+
+        const { mpcPayloads } = await evm.processMessageForSigning(message)
+
+        const rsvSignature = await chainSigContract?.sign({
+            payload: mpcPayloads[0],
+            path,
+            key_version: 0,
+        })
+
+        if (!rsvSignature) {
+            throw new Error("Failed to sign message")
+        };
+
+        const signedMessage = evm.addMessageSignature({
+            message,
+            mpcSignatures: [rsvSignature],
+        })
+
+        const messageSigner = await recoverMessageAddress({
+            message,
+            signature: signedMessage,
+        })
+
+        console.log({ signedMessage, messageSigner, from })
+    }
+
+    const handleEvmSignTypedData = async () => {
+        if (!chainSigContract) return null;
+
+        const evm = new EVM({
+            rpcUrl: sepoliaInfuraUrl,
+            contract: chainSigContract,
+        })
+
+        const path = "eth"
+
+        const { address: from } = await evm.deriveAddressAndPublicKey(nearAccount, path)
+
+        const typedData = {
+            domain: {
+                name: "Example DApp",
+                version: "1",
+                chainId: 11155111,
+                verifyingContract: "0x0000000000000000000000000000000000000000" as `0x${string}`
+            },
+            types: {
+                Person: [
+                    { name: "name", type: "string" },
+                    { name: "age", type: "uint256" }
+                ]
+            },
+            primaryType: "Person",
+            message: {
+                name: "Alice",
+                age: 28
+            }
+        };
+
+        const { mpcPayloads } = await evm.processTypedDataForSigning(typedData)
+
+        const rsvSignature = await chainSigContract?.sign({
+            payload: mpcPayloads[0],
+            path,
+            key_version: 0,
+        })
+
+        if (!rsvSignature) {
+            throw new Error("Failed to sign typed data")
+        };
+
+        const signedData = evm.addTypedDataSignature({
+            typedData,
+            mpcSignatures: [rsvSignature],
+        })
+
+        const typedDataSigner = await recoverTypedDataAddress({
+            ...typedData,
+            signature: signedData,
+        })
+
+        console.log({ signedData, typedDataSigner, from })
     }
 
     const handleBtcTransaction = async () => {
@@ -158,6 +255,18 @@ export const NearPage = () => {
                     className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
                 >
                     Send EVM Transaction
+                </button>
+                <button
+                    onClick={handleEvmSignMessage}
+                    className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+                >
+                    Sign EVM Message
+                </button>
+                <button
+                    onClick={handleEvmSignTypedData}
+                    className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+                >
+                    Sign EVM Typed Data
                 </button>
                 <button
                     onClick={handleBtcTransaction}
