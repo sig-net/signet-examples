@@ -37,7 +37,7 @@ export const NearPage = () => {
         const { balance, decimals } = await evm.getBalance(from)
         console.log({ balance, decimals })
 
-        const { transaction, mpcPayloads } = await evm.getMPCPayloadAndTransaction({
+        const { transaction, mpcPayloads } = await evm.prepareTransactionForSigning({
             from: from as `0x${string}`,
             to: "0x4174678c78fEaFd778c1ff319D5D326701449b25",
             value: 1n,
@@ -53,7 +53,7 @@ export const NearPage = () => {
             throw new Error("Failed to sign transaction")
         };
 
-        const tx = evm.addTransactionSignature({
+        const tx = evm.attachTransactionSignature({
             transaction,
             mpcSignatures: [rsvSignature],
         })
@@ -77,7 +77,7 @@ export const NearPage = () => {
 
         const message = "Hello, world!"
 
-        const { mpcPayloads } = await evm.getMPCPayloadAndMessage(message)
+        const { mpcPayloads } = await evm.prepareMessageForSigning(message)
 
         const rsvSignature = await chainSigContract?.sign({
             payload: mpcPayloads[0],
@@ -89,7 +89,7 @@ export const NearPage = () => {
             throw new Error("Failed to sign message")
         };
 
-        const signedMessage = evm.addMessageSignature({
+        const signedMessage = evm.attachMessageSignature({
             message,
             mpcSignatures: [rsvSignature],
         })
@@ -134,7 +134,7 @@ export const NearPage = () => {
             }
         };
 
-        const { mpcPayloads } = await evm.getMPCPayloadAndTypedData(typedData)
+        const { mpcPayloads } = await evm.prepareTypedDataForSigning(typedData)
 
         const rsvSignature = await chainSigContract?.sign({
             payload: mpcPayloads[0],
@@ -146,7 +146,7 @@ export const NearPage = () => {
             throw new Error("Failed to sign typed data")
         };
 
-        const signedData = evm.addTypedDataSignature({
+        const signedData = evm.attachTypedDataSignature({
             typedData,
             mpcSignatures: [rsvSignature],
         })
@@ -177,7 +177,7 @@ export const NearPage = () => {
         const { balance, decimals } = await btc.getBalance(from)
         console.log({ balance, decimals, from })
 
-        const { transaction, mpcPayloads } = await btc.getMPCPayloadAndTransaction({
+        const { transaction, mpcPayloads } = await btc.prepareTransactionForSigning({
             publicKey,
             from,
             to: "tb1qjcgmg9ekeujzkdp4ep6a2lqvc5y50495uvp4u0",
@@ -194,7 +194,7 @@ export const NearPage = () => {
             throw new Error("Failed to sign transaction")
         };
 
-        const tx = btc.addTransactionSignature({
+        const tx = btc.attachTransactionSignature({
             transaction,
             mpcSignatures: [rsvSignature],
         })
@@ -219,7 +219,7 @@ export const NearPage = () => {
         const { balance, decimals } = await osmosis.getBalance(from)
         console.log({ balance, decimals })
 
-        const { transaction, mpcPayloads } = await osmosis.getMPCPayloadAndTransaction({
+        const { transaction, mpcPayloads } = await osmosis.prepareTransactionForSigning({
             address: from,
             publicKey,
             messages: [
@@ -245,7 +245,7 @@ export const NearPage = () => {
             throw new Error("Failed to sign transaction")
         };
 
-        const tx = osmosis.addTransactionSignature({
+        const tx = osmosis.attachTransactionSignature({
             transaction,
             mpcSignatures: [rsvSignature],
         })
