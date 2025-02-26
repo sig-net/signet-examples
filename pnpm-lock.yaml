@@ -42,8 +42,8 @@ importers:
         specifier: ^19.0.0
         version: 19.0.0(react@19.0.0)
       signet.js:
-        specifier: 0.0.1-beta.10
-        version: 0.0.1-beta.10(bufferutil@4.0.9)(typescript@5.7.3)(utf-8-validate@5.0.10)(zod@3.24.1)
+        specifier: 0.0.2-beta.4
+        version: 0.0.2-beta.4(bufferutil@4.0.9)(typescript@5.7.3)(utf-8-validate@5.0.10)(zod@3.24.1)
       tailwind-merge:
         specifier: ^3.0.1
         version: 3.0.1
@@ -104,8 +104,8 @@ packages:
     resolution: {integrity: sha512-AOPI3D+a8dXnja+iwsUqGRjr1BbZIe771sXdapOtYI531gSqpi92vXivKcq2asu/DFpdl1ceFAKZyRzK2PCVcQ==}
     engines: {node: '>=6.9.0'}
 
-  '@chain-registry/types@0.50.81':
-    resolution: {integrity: sha512-0yMnHK4VVq3iiouwXf2zeQHX/YT31tbWCPO/CiB5TauP9z/pRTfJ+BIcYzsK73kY3sVYvbxhvK7JrdgS7mS6TQ==}
+  '@chain-registry/types@0.50.82':
+    resolution: {integrity: sha512-Gp66gDYZzN+ei/WkmcCafDTagHs4vaeWRSyUBej/tWSMFDui270+aMMcrA4rRJXPuA8n2U6YkFXFgNovvJt2eA==}
 
   '@coinbase/wallet-sdk@3.9.3':
     resolution: {integrity: sha512-N/A2DRIf0Y3PHc1XAMvbBUu4zisna6qAdqABMZwBMNEfWrXpAwx16pZGkYCLGE+Rvv1edbcB2LYDRnACNcmCiw==}
@@ -1125,8 +1125,8 @@ packages:
     resolution: {integrity: sha512-RE3mdQ7P3FRSe7eqCWoeQ/Z9QXrtniSjp1wUjt5nRC3WIpz5rSCve6o3fsZ2aCpJtrZjSZgjwXAoTO5k4tEI0w==}
     engines: {node: '>=4'}
 
-  axios@1.7.9:
-    resolution: {integrity: sha512-LhLcE7Hbiryz8oMDdDptSrWowmB4Bl6RCt6sIJKpRB4XtVf0iEgewX3au/pJqm+Py1kCASkb/FFKjxQaLtxJvw==}
+  axios@1.8.1:
+    resolution: {integrity: sha512-NN+fvwH/kV01dYUQ3PTOZns4LWtWhOFCAhQ/pHb88WQ1hNe5V/dvFwc4VJcDL11LT9xSX0QtsR8sWUuyOuOq7g==}
 
   axobject-query@4.1.0:
     resolution: {integrity: sha512-qIj0G9wZbMGNLjLmg1PT6v2mE9AH2zlnADJD/2tC6E00hgmhUOfEB6greHPAfLRSufHqROIUTkw6E+M3lH0PTQ==}
@@ -1242,8 +1242,8 @@ packages:
   caniuse-lite@1.0.30001699:
     resolution: {integrity: sha512-b+uH5BakXZ9Do9iK+CkDmctUSEqZl+SP056vc5usa0PL+ev5OHw003rZXcnjNDv3L8P5j6rwT6C0BPKSikW08w==}
 
-  chain-registry@1.69.135:
-    resolution: {integrity: sha512-j+OeowVPR5YnH3/a1/N8ElZuCFSYPmFl4h/qNiLuCAzNaUuxlo/ta8oQsQDVMhLuXAoHYTdCT3DXbTsCBFyruA==}
+  chain-registry@1.69.136:
+    resolution: {integrity: sha512-Ve73TBgVzF0u65U6mf3pQPob2fyb78oWG0BWG6ccuQj+gyMcZc9udkIrvB8VrxfFS5HOwEn+yzCJF1ucmMPdQg==}
 
   chalk@4.1.2:
     resolution: {integrity: sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==}
@@ -2823,8 +2823,8 @@ packages:
     resolution: {integrity: sha512-bzyZ1e88w9O1iNJbKnOlvYTrWPDl46O1bG0D3XInv+9tkPrxrN8jUUTiFlDkkmKWgn1M6CfIA13SuGqOa9Korw==}
     engines: {node: '>=14'}
 
-  signet.js@0.0.1-beta.10:
-    resolution: {integrity: sha512-YUvxJUuw0IAG0rX7ghuZ1S/OCAy6aGgD8h0do7tw1QNFtKNl/tWlmD9n5zbAYZvgiOpQEEb0Ms2M7A92IIp6Dg==}
+  signet.js@0.0.2-beta.4:
+    resolution: {integrity: sha512-lHqQGOC8PqboyJVZrMezkONzov6coa7y75zcxZuxjRWeMtl+FnSCieuiGu2rOm38UsKLdwU/LYpx+SrTVQ+XnA==}
 
   simple-swizzle@0.2.2:
     resolution: {integrity: sha512-JA//kQgZtbuY83m+xT+tXJkmJncGMTFT+C+g2h2R9uxkYIrE2yy9sgmcLhCnw57/WSD+Eh3J97FPEDFnbXnDUg==}
@@ -3364,7 +3364,7 @@ snapshots:
     dependencies:
       regenerator-runtime: 0.14.1
 
-  '@chain-registry/types@0.50.81': {}
+  '@chain-registry/types@0.50.82': {}
 
   '@coinbase/wallet-sdk@3.9.3':
     dependencies:
@@ -3473,7 +3473,7 @@ snapshots:
       '@cosmjs/socket': 0.32.4(bufferutil@4.0.9)(utf-8-validate@5.0.10)
       '@cosmjs/stream': 0.32.4
       '@cosmjs/utils': 0.32.4
-      axios: 1.7.9
+      axios: 1.8.1
       readonly-date: 1.0.0
       xstream: 11.14.0
     transitivePeerDependencies:
@@ -5016,7 +5016,7 @@ snapshots:
 
   axe-core@4.10.2: {}
 
-  axios@1.7.9:
+  axios@1.8.1:
     dependencies:
       follow-redirects: 1.15.9
       form-data: 4.0.2
@@ -5133,9 +5133,9 @@ snapshots:
 
   caniuse-lite@1.0.30001699: {}
 
-  chain-registry@1.69.135:
+  chain-registry@1.69.136:
     dependencies:
-      '@chain-registry/types': 0.50.81
+      '@chain-registry/types': 0.50.82
 
   chalk@4.1.2:
     dependencies:
@@ -6981,7 +6981,7 @@ snapshots:
 
   signal-exit@4.1.0: {}
 
-  signet.js@0.0.1-beta.10(bufferutil@4.0.9)(typescript@5.7.3)(utf-8-validate@5.0.10)(zod@3.24.1):
+  signet.js@0.0.2-beta.4(bufferutil@4.0.9)(typescript@5.7.3)(utf-8-validate@5.0.10)(zod@3.24.1):
     dependencies:
       '@cosmjs/amino': 0.32.4
       '@cosmjs/crypto': 0.32.4
@@ -6999,7 +6999,7 @@ snapshots:
       bitcoinjs-lib: 6.1.7
       bn.js: 5.2.1
       bs58: 6.0.0
-      chain-registry: 1.69.135
+      chain-registry: 1.69.136
       coinselect: 3.1.13
       cosmjs-types: 0.9.0
       elliptic: 6.6.1

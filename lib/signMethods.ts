@@ -93,9 +93,6 @@ export const signEvmSignMessage = async ({
   });
 
   console.log({ signedMessage, messageSigner, from });
-  // from: "0xafd32c74a09Dea30A81116b36E4E9b5682DCE680"
-  // messageSigner: "0x953635F8fe73E8CFc1e661A0F10b0fCe0e7a0B7f"
-  // signedMessage: "0x1db20f73d9784307fddabb9e116d1fccd2f48ad838c9a9228cdf06e6bd39d32a4895ff8f4e8c948557122b306db4b704473b584de8c404f69367a8a70927974f00"
 };
 
 export const signEvmSignTypedData = async ({

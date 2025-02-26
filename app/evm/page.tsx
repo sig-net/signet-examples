@@ -3,13 +3,18 @@ import { useChains } from "@/hooks/useChains";
 import { signBtcTransaction, signCosmosTransaction, signEvmSignMessage, signEvmSignTypedData, signEvmTransaction } from "@/lib/signMethods";
 import { useEvmContract } from "@/hooks/useEvmContract";
 import { useWalletClient } from "wagmi";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
-export const NearPage = () => {
+export const EVMPage = () => {
     const { chainSigContract } = useEvmContract();
     const chains = useChains({ contract: chainSigContract });
     const { data: walletClient } = useWalletClient()
 
-    if (!chainSigContract || !chains || !walletClient) return null;
+    if (!chainSigContract || !chains || !walletClient) return (
+        <div className="flex flex-col items-center gap-6 p-8">
+            <ConnectButton />
+        </div>
+    );
 
     const handleEvmTransaction = async () => {
         await signEvmTransaction({
@@ -18,7 +23,6 @@ export const NearPage = () => {
             predecessorId: walletClient.account.address,
         });
     };
-
     const handleEvmSignMessage = async () => {
         await signEvmSignMessage({
             chainSigContract: chainSigContract,
@@ -53,7 +57,7 @@ export const NearPage = () => {
 
     return (
         <div className="flex flex-col items-center gap-6 p-8">
-            <h1 className="text-3xl font-bold">Near Cross-Chain Transactions</h1>
+            <h1 className="text-3xl font-bold">EVM Cross-Chain Transactions</h1>
             <div className="flex flex-col gap-4 w-full max-w-md">
                 <button
                     onClick={handleEvmTransaction}
@@ -90,4 +94,4 @@ export const NearPage = () => {
     );
 };
 
-export default NearPage;
+export default EVMPage;
