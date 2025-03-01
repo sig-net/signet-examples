@@ -22,14 +22,14 @@ export const signEvmTransaction = async ({
   const { balance, decimals } = await evm.getBalance(from);
   console.log({ balance, decimals });
 
-  const { transaction, mpcPayloads } = await evm.prepareTransactionForSigning({
+  const { transaction, hashesToSign } = await evm.prepareTransactionForSigning({
     from: from as `0x${string}`,
     to: "0x4174678c78fEaFd778c1ff319D5D326701449b25",
     value: 1n,
   });
 
   const rsvSignature = await chainSigContract?.sign({
-    payload: mpcPayloads[0],
+    payload: hashesToSign[0],
     path,
     key_version: 0,
   });
@@ -40,7 +40,7 @@ export const signEvmTransaction = async ({
 
   const tx = evm.attachTransactionSignature({
     transaction,
-    mpcSignatures: [rsvSignature],
+    rsvSignatures: [rsvSignature],
   });
 
   const txHash = await evm.broadcastTx(tx);
@@ -68,10 +68,10 @@ export const signEvmSignMessage = async ({
 
   console.log({ predecessorId, path, from });
 
-  const { mpcPayloads } = await evm.prepareMessageForSigning(message);
+  const { hashesToSign } = await evm.prepareMessageForSigning(message);
 
   const rsvSignature = await chainSigContract?.sign({
-    payload: mpcPayloads[0],
+    payload: hashesToSign[0],
     path,
     key_version: 0,
   });
@@ -82,9 +82,8 @@ export const signEvmSignMessage = async ({
 
   console.log({ rsvSignature });
 
-  const signedMessage = evm.attachMessageSignature({
-    message,
-    mpcSignatures: [rsvSignature],
+  const signedMessage = evm.assembleMessageSignature({
+    rsvSignatures: [rsvSignature],
   });
 
   const messageSigner = await recoverMessageAddress({
@@ -132,10 +131,10 @@ export const signEvmSignTypedData = async ({
     },
   };
 
-  const { mpcPayloads } = await evm.prepareTypedDataForSigning(typedData);
+  const { hashesToSign } = await evm.prepareTypedDataForSigning(typedData);
 
   const rsvSignature = await chainSigContract?.sign({
-    payload: mpcPayloads[0],
+    payload: hashesToSign[0],
     path,
     key_version: 0,
   });
@@ -144,9 +143,8 @@ export const signEvmSignTypedData = async ({
     throw new Error("Failed to sign typed data");
   }
 
-  const signedData = evm.attachTypedDataSignature({
-    typedData,
-    mpcSignatures: [rsvSignature],
+  const signedData = evm.assembleTypedDataSignature({
+    rsvSignatures: [rsvSignature],
   });
 
   const typedDataSigner = await recoverTypedDataAddress({
@@ -176,7 +174,7 @@ export const signBtcTransaction = async ({
   const { balance, decimals } = await btc.getBalance(from);
   console.log({ balance, decimals, from });
 
-  const { transaction, mpcPayloads } = await btc.prepareTransactionForSigning({
+  const { transaction, hashesToSign } = await btc.prepareTransactionForSigning({
     publicKey,
     from,
     to: "tb1qjcgmg9ekeujzkdp4ep6a2lqvc5y50495uvp4u0",
@@ -184,7 +182,7 @@ export const signBtcTransaction = async ({
   });
 
   const rsvSignature = await chainSigContract?.sign({
-    payload: mpcPayloads[0],
+    payload: hashesToSign[0],
     path,
     key_version: 0,
   });
@@ -195,7 +193,7 @@ export const signBtcTransaction = async ({
 
   const tx = btc.attachTransactionSignature({
     transaction,
-    mpcSignatures: [rsvSignature],
+    rsvSignatures: [rsvSignature],
   });
 
   const txHash = await btc.broadcastTx(tx);
@@ -222,7 +220,7 @@ export const signCosmosTransaction = async ({
   const { balance, decimals } = await cosmos.getBalance(from);
   console.log({ balance, decimals });
 
-  const { transaction, mpcPayloads } =
+  const { transaction, hashesToSign } =
     await cosmos.prepareTransactionForSigning({
       address: from,
       publicKey,
@@ -240,7 +238,7 @@ export const signCosmosTransaction = async ({
     });
 
   const rsvSignature = await chainSigContract?.sign({
-    payload: mpcPayloads[0],
+    payload: hashesToSign[0],
     path,
     key_version: 0,
   });
@@ -251,7 +249,7 @@ export const signCosmosTransaction = async ({
 
   const tx = cosmos.attachTransactionSignature({
     transaction,
-    mpcSignatures: [rsvSignature],
+    rsvSignatures: [rsvSignature],
   });
 
   const txHash = await cosmos.broadcastTx(tx);

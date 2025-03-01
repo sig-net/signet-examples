@@ -42,8 +42,8 @@ importers:
         specifier: ^19.0.0
         version: 19.0.0(react@19.0.0)
       signet.js:
-        specifier: 0.0.2-beta.5
-        version: 0.0.2-beta.5(bufferutil@4.0.9)(typescript@5.7.3)(utf-8-validate@5.0.10)(zod@3.24.1)
+        specifier: 0.0.2-beta.6
+        version: 0.0.2-beta.6(bufferutil@4.0.9)(typescript@5.7.3)(utf-8-validate@5.0.10)(zod@3.24.1)
       tailwind-merge:
         specifier: ^3.0.1
         version: 3.0.1
@@ -64,10 +64,10 @@ importers:
         specifier: ^3
         version: 3.2.0
       '@types/node':
-        specifier: ^20
+        specifier: ^20.17.17
         version: 20.17.17
       '@types/react':
-        specifier: ^19
+        specifier: ^19.0.8
         version: 19.0.8
       '@types/react-dom':
         specifier: ^19
@@ -104,8 +104,8 @@ packages:
     resolution: {integrity: sha512-AOPI3D+a8dXnja+iwsUqGRjr1BbZIe771sXdapOtYI531gSqpi92vXivKcq2asu/DFpdl1ceFAKZyRzK2PCVcQ==}
     engines: {node: '>=6.9.0'}
 
-  '@chain-registry/types@0.50.82':
-    resolution: {integrity: sha512-Gp66gDYZzN+ei/WkmcCafDTagHs4vaeWRSyUBej/tWSMFDui270+aMMcrA4rRJXPuA8n2U6YkFXFgNovvJt2eA==}
+  '@chain-registry/types@0.50.85':
+    resolution: {integrity: sha512-4LgdW5ZDjzEtS42QvDxftO5Xt+lWvZoOkYeP8PZt81oiq8gvMovEhSjD/R7wSo5JPRE4M3kbQ7JjW4caScnC3A==}
 
   '@coinbase/wallet-sdk@3.9.3':
     resolution: {integrity: sha512-N/A2DRIf0Y3PHc1XAMvbBUu4zisna6qAdqABMZwBMNEfWrXpAwx16pZGkYCLGE+Rvv1edbcB2LYDRnACNcmCiw==}
@@ -1242,8 +1242,8 @@ packages:
   caniuse-lite@1.0.30001699:
     resolution: {integrity: sha512-b+uH5BakXZ9Do9iK+CkDmctUSEqZl+SP056vc5usa0PL+ev5OHw003rZXcnjNDv3L8P5j6rwT6C0BPKSikW08w==}
 
-  chain-registry@1.69.136:
-    resolution: {integrity: sha512-Ve73TBgVzF0u65U6mf3pQPob2fyb78oWG0BWG6ccuQj+gyMcZc9udkIrvB8VrxfFS5HOwEn+yzCJF1ucmMPdQg==}
+  chain-registry@1.69.139:
+    resolution: {integrity: sha512-DX/2REYook+cB5ytJFI3YR83oodJGcdWGFtrB2rzzUj1y0Di8JD4kd/hJ8uUdj0nsKxlWq8HN7vSKJZLy4p4MQ==}
 
   chalk@4.1.2:
     resolution: {integrity: sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==}
@@ -2823,8 +2823,8 @@ packages:
     resolution: {integrity: sha512-bzyZ1e88w9O1iNJbKnOlvYTrWPDl46O1bG0D3XInv+9tkPrxrN8jUUTiFlDkkmKWgn1M6CfIA13SuGqOa9Korw==}
     engines: {node: '>=14'}
 
-  signet.js@0.0.2-beta.5:
-    resolution: {integrity: sha512-SLEE+qelJbZFj20928ok0w7hJ+HmbPYe8RG4Ovc6QMncivavNaIuguHkT8uhfDvqgNfYbj7V50kV2CXff+Fypw==}
+  signet.js@0.0.2-beta.6:
+    resolution: {integrity: sha512-lncd+dEYZYYebULDXCM4EQ0Kqr1DUpBti3mKUVOuV0nncf0WjHNQPiNpruxml6AJECcJY0/RI86Hf8i1tGEE0Q==}
 
   simple-swizzle@0.2.2:
     resolution: {integrity: sha512-JA//kQgZtbuY83m+xT+tXJkmJncGMTFT+C+g2h2R9uxkYIrE2yy9sgmcLhCnw57/WSD+Eh3J97FPEDFnbXnDUg==}
@@ -3364,7 +3364,7 @@ snapshots:
     dependencies:
       regenerator-runtime: 0.14.1
 
-  '@chain-registry/types@0.50.82': {}
+  '@chain-registry/types@0.50.85': {}
 
   '@coinbase/wallet-sdk@3.9.3':
     dependencies:
@@ -5133,9 +5133,9 @@ snapshots:
 
   caniuse-lite@1.0.30001699: {}
 
-  chain-registry@1.69.136:
+  chain-registry@1.69.139:
     dependencies:
-      '@chain-registry/types': 0.50.82
+      '@chain-registry/types': 0.50.85
 
   chalk@4.1.2:
     dependencies:
@@ -6981,7 +6981,7 @@ snapshots:
 
   signal-exit@4.1.0: {}
 
-  signet.js@0.0.2-beta.5(bufferutil@4.0.9)(typescript@5.7.3)(utf-8-validate@5.0.10)(zod@3.24.1):
+  signet.js@0.0.2-beta.6(bufferutil@4.0.9)(typescript@5.7.3)(utf-8-validate@5.0.10)(zod@3.24.1):
     dependencies:
       '@cosmjs/amino': 0.32.4
       '@cosmjs/crypto': 0.32.4
@@ -6999,7 +6999,7 @@ snapshots:
       bitcoinjs-lib: 6.1.7
       bn.js: 5.2.1
       bs58: 6.0.0
-      chain-registry: 1.69.136
+      chain-registry: 1.69.139
       coinselect: 3.1.13
       cosmjs-types: 0.9.0
       elliptic: 6.6.1
