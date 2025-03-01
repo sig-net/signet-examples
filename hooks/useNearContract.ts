@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { utils } from "signet.js";
 import { useEnv } from "./useEnv";
-import useInitNear from "@/app/near/_hooks/useInitNear";
+import useInitNear from "./useInitNear";
 
 export const useNearContract = () => {
   const { nearAccount, nearNetworkId, nearChainSignatureContract } = useEnv();

@@ -67,13 +67,33 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the application.
 
-## Pages
+## Application Structure
 
-The application consists of the following pages:
+The application features a single-page interface that allows you to switch between NEAR and EVM modes:
 
-- **Home** (`/`): Landing page with links to NEAR and EVM demos
-- **NEAR** (`/near`): Demonstrates NEAR transaction signing and verification
-- **EVM** (`/evm`): Demonstrates EVM transaction signing, message signing, typed data signing, as well as Bitcoin and Cosmos transaction signing
+- **Home Page** (`/`): The main and only page that handles both NEAR and EVM interactions
+  - Use the mode toggle in the header to switch between NEAR and EVM
+  - Or use the query parameter `?mode=near` or `?mode=evm` to specify the mode
+
+The interface provides buttons for:
+
+- Sending EVM transactions
+- Signing EVM messages
+- Signing EVM typed data
+- Sending Bitcoin transactions
+- Sending Cosmos (Osmosis) transactions
+
+## Project Structure
+
+The project has been fully consolidated into a single-page application:
+
+```
+app/
+├── _hooks/           # Shared hooks (NEAR initialization)
+├── _providers/       # Shared providers (EVM/Wagmi providers)
+├── page.tsx          # Main application page
+└── layout.tsx        # Root layout with providers
+```
 
 ## License
 
