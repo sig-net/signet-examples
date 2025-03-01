@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# NEAR Chain Signature Examples
 
-## Getting Started
+This repository demonstrates how to use ChainsSignatures using NEAR's and EVM contracts. The examples include:
 
-First, run the development server:
+- EVM:
+  - Signing and broadcasting transactions
+  - Signing and verifying messages
+  - Signing and verifying typed data
+- Cosmos:
+  - Signing and broadcasting transactions
+- Bitcoin:
+  - Signing and broadcasting transactions
+
+## Prerequisites
+
+- Node.js
+- pnpm
+- A NEAR testnet account
+- A Web3 wallet (like MetaMask) for EVM interactions
+
+## Installation
+
+1. Clone the repository:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/sig-net/signet-examples.git
+cd signet-examples
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. Set up environment variables:
 
-## Learn More
+Copy the `.env.example` file to `.env`:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+cp .env.example .env
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+4. Fill in the required environment variables:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+# General
+NEXT_PUBLIC_SEPOLIA_INFURA_URL=       # Your Infura URL for Sepolia testnet
 
-## Deploy on Vercel
+# EVM
+NEXT_PUBLIC_RAINBOW_KIT_PROJECT_ID=   # Your RainbowKit project ID
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# Near
+NEXT_PUBLIC_NEAR_NETWORK_ID=          # e.g., testnet
+NEXT_PUBLIC_NEAR_ACCOUNT=             # Your NEAR testnet account
+NEXT_PUBLIC_NEAR_PRIVATE_KEY=         # Your NEAR account private key
+NEXT_PUBLIC_NEAR_CHAIN_SIGNATURE_CONTRACT= # Chain signature contract address
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Running the Application
+
+Start the development server:
+
+```bash
+pnpm dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the application.
+
+## Pages
+
+The application consists of the following pages:
+
+- **Home** (`/`): Landing page with links to NEAR and EVM demos
+- **NEAR** (`/near`): Demonstrates NEAR transaction signing and verification
+- **EVM** (`/evm`): Demonstrates EVM transaction signing, message signing, typed data signing, as well as Bitcoin and Cosmos transaction signing
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.

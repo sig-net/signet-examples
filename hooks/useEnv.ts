@@ -15,7 +15,7 @@ export type EnvSchema = z.infer<typeof envSchema>;
 
 export const useEnv = (): EnvSchema => {
   const parsed = envSchema.safeParse({
-    rainbowKitProjectId: process.env.NEXT_PUBLIC_PROJECT_ID,
+    rainbowKitProjectId: process.env.NEXT_PUBLIC_RAINBOW_KIT_PROJECT_ID,
     nearNetworkId: process.env.NEXT_PUBLIC_NEAR_NETWORK_ID,
     nearAccount: process.env.NEXT_PUBLIC_NEAR_ACCOUNT,
     nearPrivateKey: process.env.NEXT_PUBLIC_NEAR_PRIVATE_KEY,
