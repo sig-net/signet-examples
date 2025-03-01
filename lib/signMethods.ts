@@ -38,7 +38,7 @@ export const signEvmTransaction = async ({
     throw new Error("Failed to sign transaction");
   }
 
-  const tx = evm.attachTransactionSignature({
+  const tx = evm.finalizeTransactionSigning({
     transaction,
     rsvSignatures: [rsvSignature],
   });
@@ -68,10 +68,10 @@ export const signEvmSignMessage = async ({
 
   console.log({ predecessorId, path, from });
 
-  const { hashesToSign } = await evm.prepareMessageForSigning(message);
+  const { hashToSign } = await evm.prepareMessageForSigning(message);
 
   const rsvSignature = await chainSigContract?.sign({
-    payload: hashesToSign[0],
+    payload: hashToSign,
     path,
     key_version: 0,
   });
@@ -82,8 +82,8 @@ export const signEvmSignMessage = async ({
 
   console.log({ rsvSignature });
 
-  const signedMessage = evm.assembleMessageSignature({
-    rsvSignatures: [rsvSignature],
+  const signedMessage = evm.finalizeMessageSigning({
+    rsvSignature,
   });
 
   const messageSigner = await recoverMessageAddress({
@@ -131,10 +131,10 @@ export const signEvmSignTypedData = async ({
     },
   };
 
-  const { hashesToSign } = await evm.prepareTypedDataForSigning(typedData);
+  const { hashToSign } = await evm.prepareTypedDataForSigning(typedData);
 
   const rsvSignature = await chainSigContract?.sign({
-    payload: hashesToSign[0],
+    payload: hashToSign,
     path,
     key_version: 0,
   });
@@ -143,8 +143,8 @@ export const signEvmSignTypedData = async ({
     throw new Error("Failed to sign typed data");
   }
 
-  const signedData = evm.assembleTypedDataSignature({
-    rsvSignatures: [rsvSignature],
+  const signedData = evm.finalizeTypedDataSigning({
+    rsvSignature,
   });
 
   const typedDataSigner = await recoverTypedDataAddress({
@@ -191,7 +191,7 @@ export const signBtcTransaction = async ({
     throw new Error("Failed to sign transaction");
   }
 
-  const tx = btc.attachTransactionSignature({
+  const tx = btc.finalizeTransactionSigning({
     transaction,
     rsvSignatures: [rsvSignature],
   });
@@ -247,7 +247,7 @@ export const signCosmosTransaction = async ({
     throw new Error("Failed to sign transaction");
   }
 
-  const tx = cosmos.attachTransactionSignature({
+  const tx = cosmos.finalizeTransactionSigning({
     transaction,
     rsvSignatures: [rsvSignature],
   });
