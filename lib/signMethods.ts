@@ -66,8 +66,6 @@ export const signEvmSignMessage = async ({
 
   const message = "Hello, world!";
 
-  console.log({ predecessorId, path, from });
-
   const { hashToSign } = await evm.prepareMessageForSigning(message);
 
   const rsvSignature = await chainSigContract?.sign({
@@ -79,8 +77,6 @@ export const signEvmSignMessage = async ({
   if (!rsvSignature) {
     throw new Error("Failed to sign message");
   }
-
-  console.log({ rsvSignature });
 
   const signedMessage = evm.finalizeMessageSigning({
     rsvSignature,
