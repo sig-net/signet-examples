@@ -15,8 +15,8 @@ import useInitNear from "@/hooks/useInitNear";
 import { useWalletClient } from "wagmi";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { Header } from "@/components/header";
-import { Button } from "@/components/ui/button";
 import { useSearchParams } from "next/navigation";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -73,7 +73,7 @@ export default function HomePage() {
     return (
       <div className="flex flex-col min-h-screen">
         <Header />
-        <main className="flex-1 flex flex-col items-center justify-center p-8 gap-8">
+        <main className="flex-1 flex flex-col items-center justify-center p-8">
           <Card className="w-full max-w-md">
             <CardHeader>
               <CardTitle>Loading...</CardTitle>
@@ -95,8 +95,6 @@ export default function HomePage() {
   }
 
   const handleEvmTransaction = async () => {
-    if (!contract || !chains || !chains.evm) return;
-
     await signEvmTransaction({
       chainSigContract: contract,
       evm: chains.evm,
@@ -105,8 +103,6 @@ export default function HomePage() {
   };
 
   const handleEvmSignMessage = async () => {
-    if (!contract || !chains || !chains.evm) return;
-
     await signEvmSignMessage({
       chainSigContract: contract,
       evm: chains.evm,
@@ -115,8 +111,6 @@ export default function HomePage() {
   };
 
   const handleEvmSignTypedData = async () => {
-    if (!contract || !chains || !chains.evm) return;
-
     await signEvmSignTypedData({
       chainSigContract: contract,
       evm: chains.evm,
@@ -125,8 +119,6 @@ export default function HomePage() {
   };
 
   const handleBtcTransaction = async () => {
-    if (!contract || !chains || !chains.btc) return;
-
     await signBtcTransaction({
       chainSigContract: contract,
       btc: chains.btc,
@@ -135,8 +127,6 @@ export default function HomePage() {
   };
 
   const handleOsmosisTransaction = async () => {
-    if (!contract || !chains || !chains.cosmos) return;
-
     await signCosmosTransaction({
       chainSigContract: contract,
       cosmos: chains.cosmos,
@@ -147,111 +137,90 @@ export default function HomePage() {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <main className="flex-1 flex flex-col items-center p-8 gap-8">
-        <Card className="w-full max-w-3xl">
-          <CardHeader className="text-center">
-            <CardTitle>
-              {isNearMode ? "NEAR" : "EVM"} Cross-Chain Transactions
-            </CardTitle>
-            <CardDescription>
-              Sign and verify transactions across multiple blockchains
-              {isNearMode ? " using NEAR" : ""}
-            </CardDescription>
-            {isNearMode && account && (
-              <div className="mt-4 text-sm text-muted-foreground border rounded-md p-2 bg-muted/50 max-w-md mx-auto">
-                Connected as:{" "}
-                <span className="font-mono">{account.accountId}</span>
-              </div>
-            )}
-          </CardHeader>
+      <main className="flex-1 p-6 max-w-4xl mx-auto w-full">
+        <div className="text-center mb-8">
+          <h1 className="text-2xl font-bold mb-2">
+            {isNearMode ? "NEAR" : "EVM"} Cross-Chain Transactions
+          </h1>
+          {isNearMode && account && (
+            <div className="mt-4 text-sm text-muted-foreground border rounded-md p-2 bg-muted/50 max-w-md mx-auto">
+              Connected as:{" "}
+              <span className="font-mono">{account.accountId}</span>
+            </div>
+          )}
+        </div>
 
-          <CardContent className="space-y-8">
+        <div className="space-y-8">
+          <Card>
+            <CardHeader>
+              <CardTitle>Ethereum</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <Button
+                  onClick={handleEvmTransaction}
+                  variant="outline"
+                  className="h-14"
+                >
+                  Send EVM Transaction
+                </Button>
+                <Button
+                  onClick={handleEvmSignMessage}
+                  variant="outline"
+                  className="h-14"
+                >
+                  Sign EVM Message
+                </Button>
+                <Button
+                  onClick={handleEvmSignTypedData}
+                  variant="outline"
+                  className="h-14"
+                >
+                  Sign EVM Typed Data
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Card>
               <CardHeader>
-                <CardTitle className="text-xl">Ethereum</CardTitle>
+                <CardTitle>Bitcoin</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <Button
-                    onClick={handleEvmTransaction}
-                    variant="outline"
-                    className="h-16 border-2"
-                  >
-                    <div className="flex flex-col items-center justify-center">
-                      <span>Send EVM Transaction</span>
-                    </div>
-                  </Button>
-                  <Button
-                    onClick={handleEvmSignMessage}
-                    variant="outline"
-                    className="h-16 border-2"
-                  >
-                    <div className="flex flex-col items-center justify-center">
-                      <span>Sign EVM Message</span>
-                    </div>
-                  </Button>
-                  <Button
-                    onClick={handleEvmSignTypedData}
-                    variant="outline"
-                    className="h-16 border-2 col-span-full"
-                  >
-                    <div className="flex flex-col items-center justify-center">
-                      <span>Sign EVM Typed Data</span>
-                    </div>
-                  </Button>
-                </div>
+                <Button
+                  onClick={handleBtcTransaction}
+                  variant="outline"
+                  className="w-full h-14"
+                >
+                  Send BTC Transaction
+                </Button>
               </CardContent>
             </Card>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-xl">Bitcoin</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <Button
-                    onClick={handleBtcTransaction}
-                    variant="outline"
-                    className="w-full h-16 border-2"
-                  >
-                    <div className="flex flex-col items-center justify-center">
-                      <span>Send BTC Transaction</span>
-                    </div>
-                  </Button>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-xl">Cosmos</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <Button
-                    onClick={handleOsmosisTransaction}
-                    variant="outline"
-                    className="w-full h-16 border-2"
-                  >
-                    <div className="flex flex-col items-center justify-center">
-                      <span>Send Osmosis Transaction</span>
-                    </div>
-                  </Button>
-                </CardContent>
-              </Card>
-            </div>
-          </CardContent>
-
-          {!isNearMode && (
-            <CardFooter className="flex justify-center">
-              <ConnectButton />
-            </CardFooter>
-          )}
-        </Card>
-      </main>
-      <footer className="border-t py-4 text-center text-sm text-muted-foreground">
-        <div className="container">
-          <p>NEAR Chain Signature Examples &copy; {new Date().getFullYear()}</p>
+            <Card>
+              <CardHeader>
+                <CardTitle>Cosmos</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <Button
+                  onClick={handleOsmosisTransaction}
+                  variant="outline"
+                  className="w-full h-14"
+                >
+                  Send Osmosis Transaction
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
         </div>
-      </footer>
+
+        {!isNearMode && (
+          <div className="flex justify-center mt-8">
+            <ConnectButton />
+          </div>
+        )}
+      </main>
     </div>
   );
 }
