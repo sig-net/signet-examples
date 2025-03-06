@@ -1,4 +1,4 @@
-import { Bitcoin, ChainSignatureContract, Cosmos, EVM } from "signet.js";
+import { chainAdapters, contracts } from "signet.js";
 import { recoverMessageAddress, recoverTypedDataAddress } from "viem";
 
 export const signEvmTransaction = async ({
@@ -6,8 +6,8 @@ export const signEvmTransaction = async ({
   evm,
   predecessorId,
 }: {
-  chainSigContract: ChainSignatureContract;
-  evm: EVM;
+  chainSigContract: contracts.ChainSignatureContract;
+  evm: chainAdapters.evm.EVM;
   predecessorId: string;
 }) => {
   if (!chainSigContract) return;
@@ -53,8 +53,8 @@ export const signEvmSignMessage = async ({
   evm,
   predecessorId,
 }: {
-  chainSigContract: ChainSignatureContract;
-  evm: EVM;
+  chainSigContract: contracts.ChainSignatureContract;
+  evm: chainAdapters.evm.EVM;
   predecessorId: string;
 }) => {
   const path = "eth";
@@ -95,8 +95,8 @@ export const signEvmSignTypedData = async ({
   evm,
   predecessorId,
 }: {
-  chainSigContract: ChainSignatureContract;
-  evm: EVM;
+  chainSigContract: contracts.ChainSignatureContract;
+  evm: chainAdapters.evm.EVM;
   predecessorId: string;
 }) => {
   const path = "eth";
@@ -156,8 +156,8 @@ export const signBtcTransaction = async ({
   btc,
   predecessorId,
 }: {
-  chainSigContract: ChainSignatureContract;
-  btc: Bitcoin;
+  chainSigContract: contracts.ChainSignatureContract;
+  btc: chainAdapters.btc.Bitcoin;
   predecessorId: string;
 }) => {
   const path = "btc";
@@ -202,8 +202,8 @@ export const signCosmosTransaction = async ({
   cosmos,
   predecessorId,
 }: {
-  chainSigContract: ChainSignatureContract;
-  cosmos: Cosmos;
+  chainSigContract: contracts.ChainSignatureContract;
+  cosmos: chainAdapters.cosmos.Cosmos;
   predecessorId: string;
 }) => {
   const path = "osmo";

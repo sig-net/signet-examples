@@ -1,35 +1,29 @@
-import {
-  ChainSignatureContract,
-  EVM,
-  Bitcoin,
-  Cosmos,
-  BTCRpcAdapters,
-} from "signet.js";
+import { chainAdapters, contracts } from "signet.js";
 import { useEnv } from "./useEnv";
 
 export const useChains = ({
   contract,
 }: {
-  contract?: ChainSignatureContract;
+  contract?: contracts.ChainSignatureContract;
 }) => {
   const { sepoliaInfuraUrl } = useEnv();
   if (!contract) return null;
 
   return {
-    evm: new EVM({
+    evm: new chainAdapters.evm.EVM({
       rpcUrl: sepoliaInfuraUrl,
       contract: contract,
     }),
 
-    btc: new Bitcoin({
+    btc: new chainAdapters.btc.Bitcoin({
       network: "testnet",
-      btcRpcAdapter: new BTCRpcAdapters.Mempool(
+      btcRpcAdapter: new chainAdapters.btc.BTCRpcAdapters.Mempool(
         "https://mempool.space/testnet4/api"
       ),
       contract: contract,
     }),
 
-    cosmos: new Cosmos({
+    cosmos: new chainAdapters.cosmos.Cosmos({
       chainId: "osmo-test-5",
       contract: contract,
     }),

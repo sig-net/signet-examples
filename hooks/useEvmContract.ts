@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { utils } from "signet.js";
+import { constants, contracts } from "signet.js";
 import { usePublicClient, useWalletClient } from "wagmi";
 
 export const useEvmContract = () => {
@@ -11,10 +11,11 @@ export const useEvmContract = () => {
       return undefined;
     }
 
-    return new utils.chains.evm.ChainSignatureContract({
+    return new contracts.evm.ChainSignatureContract({
       publicClient,
       walletClient: walletClient,
-      contractAddress: utils.constants.CONTRACT_ADDRESSES.ETHEREUM.TESTNET_DEV,
+      contractAddress: constants.CONTRACT_ADDRESSES.ETHEREUM
+        .TESTNET_DEV as `0x${string}`,
     });
   }, [publicClient, walletClient]);
 

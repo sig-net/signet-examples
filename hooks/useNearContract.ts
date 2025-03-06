@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { utils } from "signet.js";
+import { contracts } from "signet.js";
 import { useEnv } from "./useEnv";
 import useInitNear from "./useInitNear";
 
@@ -10,7 +10,7 @@ export const useNearContract = () => {
   const chainSigContract = useMemo(() => {
     if (!account) return undefined;
 
-    return new utils.chains.near.ChainSignatureContract({
+    return new contracts.near.ChainSignatureContract({
       networkId: nearNetworkId as "mainnet" | "testnet",
       contractId: nearChainSignatureContract,
       accountId: nearAccount,
