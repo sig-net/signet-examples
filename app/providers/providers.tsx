@@ -4,7 +4,7 @@ import "@rainbow-me/rainbowkit/styles.css";
 
 import { getDefaultConfig, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { WagmiProvider } from "wagmi";
-import { baseSepolia, sepolia } from "wagmi/chains";
+import { sepolia } from "wagmi/chains";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { useEnv } from "@/hooks/useEnv";
 
@@ -20,9 +20,7 @@ export const Providers: React.FC<ProvidersProps> = ({ children }) => {
     projectId: rainbowKitProjectId,
     chains: [
       { ...sepolia, rpcUrls: { default: { http: [sepoliaInfuraUrl] } } },
-      baseSepolia,
     ],
-    ssr: true,
   });
 
   const queryClient = new QueryClient();
